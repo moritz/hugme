@@ -19,14 +19,10 @@ my %trusted = (
 
 my %tokens = %{ from_json( slurp 'tokens.json' ) };
 
-print Dumper \%tokens;
-
 my %projects = %{ from_json( slurp 'projects.json' ) };
 for (values(%projects)) {
     $_->{auth} = { map {; $_ => 1} @{$_->{auth}} };
 }
-
-print Dumper \%projects;
 
 sub add_collab {
     my ($who, $repo, $auth) = @_;
@@ -123,6 +119,7 @@ sub irc_public {
     my ($sender, $who, $where, $what) = @_[SENDER, ARG0 .. ARG2];
     my $nick = ( split /!/, $who )[0];
     my $channel = $where->[0];
+    my $response;
 
     if ($what =~ /^ \Q$nickname\E [:;,.]?  \s* (.+) /x) {
         my $msg = $1;
@@ -139,15 +136,24 @@ sub irc_public {
             $irc->yield(ctcp => $channel => "ACTION $1s $2");
         } elsif ($msg =~ m/^(?:list project|project list)/) {
             my $proj = join ', ', sort keys %projects;
-            $irc->yield(
-                privmsg => $channel,
-                "$nick: I know about these projects: $proj",
-            );
+            $response = "I know about these projects: $proj";
+        } elsif ($msg =~ m/^show (\S+)/) {
+            my $proj = $1;
+            if ($projects{$proj}) {
+                $response = "the following people have power over $proj: "
+                            . join(", ", keys %{$projects{$proj}{auth}});
+            } else {
+                $response = "sorry, I don't know anything about '$proj'";
+            }
+
         } elsif ($msg =~ m/^help/i) {
+            $response = "'$nickname: (add \$who to \$project | list projects"
+                        . " | hug \$nickname)'";
+        }
+        if (defined($response)) {
             $irc->yield(
                 privmsg => $channel,
-                "$nick: '$nickname: (add \$who to \$project | list projects"
-                . " | hug \$nickname)'",
+                "$nick: $response",
             );
         }
     }
