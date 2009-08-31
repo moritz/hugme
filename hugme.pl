@@ -2,53 +2,12 @@ use strict;
 use warnings;
 use 5.010;
 use POE qw(Component::IRC);
-use Net::GitHub;
 use Data::Dumper;
 use Scalar::Util qw(reftype);
-use JSON qw(from_json);
-use File::Slurp qw(slurp);
+use lib 'lib';
+use Hugme::ProjectManager;
 
-# Github interface stuff
-my %tokens = %{ from_json( slurp 'tokens.json' ) };
-
-my %projects = %{ from_json( slurp 'projects.json' ) };
-for (values(%projects)) {
-    $_->{auth} = { map {; $_ => 1} @{$_->{auth}} };
-}
-
-sub add_collab {
-    my ($who, $repo, $auth) = @_;
-    unless ($projects{$repo}) {
-        return "sorry, I don't know anything about project '$repo'";
-    }
-    unless ($projects{$repo}{auth}{$auth}) {
-        return "sorry, you don't have permissions to change '$repo'";
-    }
-
-    my $owner = $projects{$repo}{owner};
-
-    my $github = Net::GitHub->new(
-        owner   => $owner,
-        login   => $owner,
-        repo    => $repo,
-        token   => $tokens{$owner},
-    );
-    my $response = $github->repos->add_collaborator($who);
-
-    if (reftype($response) eq 'HASH') {
-        return "ERROR: Can't add $who to $repo:  $response->{error}";
-    } elsif (reftype($response) eq 'ARRAY') {
-        my %u;
-        @u{@$response} = (1) x @$response;
-        if ($u{$who}) {
-            return "successfully added $who to $repo";
-        } else {
-            return "github reported success, but it didn't work anyway - WTF?";
-        }
-    } else {
-        return "github responded in a a really unexpected way - HUH?";
-    }
-}
+my $pm = Hugme::ProjectManager->new();
 
 # IRC stuff
 # mostly taken from the POE::Component::IRC's SYNOPSIS
@@ -127,13 +86,13 @@ sub irc_public {
         } elsif ($msg =~ m/^(hug|cuddle) (\S+)/) {
             $irc->yield(ctcp => $channel => "ACTION $1s $2");
         } elsif ($msg =~ m/^(?:list project|project list)/) {
-            my $proj = join ', ', sort keys %projects;
+            my $proj = join ', ', sort keys %{ $pm->projects };
             $response = "I know about these projects: $proj";
         } elsif ($msg =~ m/^show (\S+)/) {
             my $proj = $1;
-            if ($projects{$proj}) {
+            if ($pm->projects->{$proj}) {
                 $response = "the following people have power over $proj: "
-                            . join(", ", keys %{$projects{$proj}{auth}});
+                            . join(", ", keys %{$pm->projects->{$proj}{auth}});
             } else {
                 $response = "sorry, I don't know anything about '$proj'";
             }
@@ -165,7 +124,7 @@ sub irc_whois {
             && $w->{identified} =~ m/^is signed on as account (.*)/) {
         my $account = $1;
         for (@{ $jobs{ $nick }}) {
-            my $response = add_collab($_->{whom}, $_->{proj}, $account);
+            my $response = $pm->add_collab($_->{whom}, $_->{proj}, $account);
             $irc->yield(
                 privmsg => $channel, "$nick: $response",
             );
