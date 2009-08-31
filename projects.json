@@ -1,0 +1,26 @@
+{
+    "json"  : {
+        "owner" : "moritz",
+        "auth"  : [ "viklund", "moritz_", "masak"]
+    },
+    "perl6-examples"  : {
+        "owner" : "perl6",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+    },
+    "proto"  : {
+        "owner" : "masak",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+    },
+    "svg-plot" : {
+        "owner" : "moritz",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+    },
+    "svg-matchdumper" : {
+        "owner" : "moritz",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+    },
+    "tufte" : {
+        "owner" : "moritz",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+    }
+}

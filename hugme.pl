@@ -21,33 +21,12 @@ my %tokens = %{ from_json( slurp 'tokens.json' ) };
 
 print Dumper \%tokens;
 
-my %projects = (
-    json => {
-        owner => 'moritz',
-        auth  => \%trusted,
-    },
-    proto => {
-        owner => 'masak',
-        auth  => \%trusted,
-    },
-    'svg-plot' => {
-        owner => 'moritz',
-        auth  => \%trusted,
-    },
-    'svg-matchdumper' => {
-        owner => 'moritz',
-        auth  => \%trusted,
-    },
-    tufte => {
-        owner => 'moritz',
-        auth  => \%trusted,
-    },
-    'perl6-examples' => {
-        owner => 'perl6',
-        auth  => \%trusted,
-    },
-);
+my %projects = %{ from_json( slurp 'projects.json' ) };
+for (values(%projects)) {
+    $_->{auth} = { map {; $_ => 1} @{$_->{auth}} };
+}
 
+print Dumper \%projects;
 
 sub add_collab {
     my ($who, $repo, $auth) = @_;
