@@ -148,7 +148,7 @@ sub irc_public {
 
         } elsif ($msg =~ m/^help/i) {
             $response = "'$nickname: (add \$who to \$project | list projects"
-                        . " | hug \$nickname)'";
+                        . " | show \$project | hug \$nickname)'";
         }
         if (defined($response)) {
             $irc->yield(
