@@ -12,6 +12,7 @@ sub new {
     $self->{tokens}      = from_json( slurp 'tokens.json' );
     $self->{projects}    = from_json( slurp 'projects.json' );
     $self->_mogrify_project_list();
+    return $self;
 }
 
 sub _mogrify_project_list {
