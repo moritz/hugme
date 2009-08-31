@@ -9,14 +9,6 @@ use JSON qw(from_json);
 use File::Slurp qw(slurp);
 
 # Github interface stuff
-my %trusted = (
-    pmichaud        => 1,
-    moritz_         => 1,
-    masak           => 1,
-    TimToady        => 1,
-    '[particle]'    => 1,
-);
-
 my %tokens = %{ from_json( slurp 'tokens.json' ) };
 
 my %projects = %{ from_json( slurp 'projects.json' ) };
