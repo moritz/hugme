@@ -91,8 +91,8 @@ sub irc_public {
         } elsif ($msg =~ m/^show (\S+)/) {
             my $proj = $1;
             if ($pm->projects->{$proj}) {
-                $response = "the following people have power over $proj: "
-                            . join(", ", keys %{$pm->projects->{$proj}{auth}});
+                $response = "the following people have power over '$proj': "
+                            . join(", ", $pm->admins);
             } else {
                 $response = "sorry, I don't know anything about '$proj'";
             }

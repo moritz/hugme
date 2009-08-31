@@ -59,5 +59,8 @@ sub projects {
     $_[0]->{projects};
 }
 
+sub admins {
+    sort keys %{ $_[0]->{projects}{$_[1]}{auth} };
+}
 
 1;
