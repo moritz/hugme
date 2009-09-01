@@ -3,7 +3,6 @@ use warnings;
 use 5.010;
 use POE qw(Component::IRC);
 use Data::Dumper;
-use Scalar::Util qw(reftype);
 use lib 'lib';
 use Hugme::ProjectManager;
 
@@ -90,9 +89,9 @@ sub irc_public {
             $response = "I know about these projects: $proj";
         } elsif ($msg =~ m/^show (\S+)/) {
             my $proj = $1;
-            if ($pm->projects->{$proj}) {
+            if (defined $pm->projects($proj)) {
                 $response = "the following people have power over '$proj': "
-                            . join(", ", $pm->admins);
+                            . join(", ", $pm->admins($proj));
             } else {
                 $response = "sorry, I don't know anything about '$proj'";
             }

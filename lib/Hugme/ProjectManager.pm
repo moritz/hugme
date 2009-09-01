@@ -3,6 +3,9 @@ package Hugme::ProjectManager;
 use JSON qw(from_json);
 use File::Slurp qw(slurp);
 use Net::GitHub;
+use Scalar::Util qw(reftype);
+use strict;
+use warnings;
 
 sub new {
     my $class = shift;
@@ -57,11 +60,17 @@ sub add_collab {
 }
 
 sub projects {
-    $_[0]->{projects};
+    my ($self, $proj) = @_;
+    if (defined($proj)) {
+        return $self->{projects}{$proj};
+    } else {
+        return $self->{projects};
+    }
 }
 
 sub admins {
-    sort keys %{ $_[0]->{projects}{$_[1]}{auth} };
+    my ($self, $proj) = @_;
+    sort keys %{ $self->{projects}{$proj}{auth} };
 }
 
 1;
