@@ -83,7 +83,8 @@ sub irc_public {
             };
             $irc->yield( whois => $nick);
         } elsif ($msg =~ m/^(hug|cuddle) (\S+)/) {
-            $irc->yield(ctcp => $channel => "ACTION $1s $2");
+            my $action = $2 eq 'me' ? "ACTION $1s $nick" : "ACTION $1s $2";
+            $irc->yield(ctcp => $channel => $action);
         } elsif ($msg =~ m/^(?:list project|project list)/) {
             my $proj = join ', ', sort keys %{ $pm->projects };
             $response = "I know about these projects: $proj";
