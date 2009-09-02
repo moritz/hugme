@@ -83,4 +83,25 @@ sub url {
     return "http://github.com/" . $self->owner($proj) . '/' . $proj . '/';
 }
 
+=head1 NAME
+
+Hugme::ProjectManager - manage a collection of github projects
+
+=head1 SYNOPSIS
+
+    use Hugme::ProjectManager;
+
+    # automatically load data from JSON files:
+    my $p = Hugme:::ProjectManager->new();
+    my @projects = $p->projects();
+    my $url      = $p->url($projects[0]);
+
+    # add a new contributor to a project
+    # this is generally performed by a trusted person $trusted
+    
+    my ($whom, $repo, $trusted) = qw(somebody CoolProject TrustedNickname);
+    my $response = $p->add_collab($whom, $repo, $trusted);
+
+=cut
+
 1;
