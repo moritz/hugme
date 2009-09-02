@@ -73,4 +73,14 @@ sub admins {
     sort keys %{ $self->{projects}{$proj}{auth} };
 }
 
+sub owner {
+    my ($self, $proj) = @_;
+    return $self->{projects}{$proj}{owner}
+}
+
+sub url {
+    my ($self, $proj) = @_;
+    return "http://github.com/" . $self->owner($proj) . '/' . $proj . '/';
+}
+
 1;

@@ -92,7 +92,8 @@ sub irc_public {
             my $proj = $1;
             if (defined $pm->projects($proj)) {
                 $response = "the following people have power over '$proj': "
-                            . join(", ", $pm->admins($proj));
+                            . join(", ", $pm->admins($proj))
+                            . '. URL: ' . $pm->url($proj);
             } else {
                 $response = "sorry, I don't know anything about '$proj'";
             }
