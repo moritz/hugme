@@ -50,7 +50,7 @@ sub add_collab {
         my %u;
         @u{@$response} = (1) x @$response;
         if ($u{$who}) {
-            return "successfully added $who to $repo";
+            return "ACTION hugs $who. Welcome to $repo!";
         } else {
             return "github reported success, but it didn't work anyway - WTF?";
         }

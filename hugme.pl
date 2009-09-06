@@ -83,8 +83,7 @@ sub irc_public {
             };
             $irc->yield( whois => $nick);
         } elsif ($msg =~ m/^(hug|cuddle) (\S+)/) {
-            my $action = $2 eq 'me' ? "ACTION $1s $nick" : "ACTION $1s $2";
-            $irc->yield(ctcp => $channel => $action);
+            $response = $2 eq 'me' ? "ACTION $1s $nick" : "ACTION $1s $2";
         } elsif ($msg =~ m/^(?:list project|project list)/) {
             my $proj = join ', ', sort keys %{ $pm->projects };
             $response = "I know about these projects: $proj";
@@ -102,12 +101,7 @@ sub irc_public {
             $response = "'$nickname: (add \$who to \$project | list projects"
                         . " | show \$project | hug \$nickname)'";
         }
-        if (defined($response)) {
-            $irc->yield(
-                privmsg => $channel,
-                "$nick: $response",
-            );
-        }
+        say_or_action($response, $channel, $nick);
     }
     return;
 }
@@ -126,9 +120,7 @@ sub irc_whois {
         my $account = $1;
         for (@{ $jobs{ $nick }}) {
             my $response = $pm->add_collab($_->{whom}, $_->{proj}, $account);
-            $irc->yield(
-                privmsg => $channel, "$nick: $response",
-            );
+            say_or_action($response, $channel, $nick);
         }
     } else {
         $irc->yield(
@@ -138,6 +130,19 @@ sub irc_whois {
     }
     delete $jobs{ $nick };
     return;
+}
+
+sub say_or_action {
+    my ($response, $channel, $nick) = @_;
+    if (defined($response)) {
+        if ($response =~ m/^ACTION/) {
+            $irc->yield( ctcp => $channel, $response);
+        } else  {
+            $irc->yield(
+                privmsg =>  $channel, "$nick: $response",
+            );
+        }
+    }
 }
 
 # We registered for all events, this will produce some debug info.
