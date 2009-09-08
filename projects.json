@@ -19,6 +19,10 @@
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
     },
+    'temporal-flux-perl6syn' : {
+        "owner" : "masak",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+    },
     "tufte" : {
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
