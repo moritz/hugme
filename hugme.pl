@@ -97,6 +97,9 @@ sub irc_public {
                 $response = "sorry, I don't know anything about '$proj'";
             }
 
+        } elsif ($msg =~ m/^reload data/) {
+            $pm->read_data();
+            $response = "reloaded successfully";
         } elsif ($msg =~ m/^help/i) {
             $response = "'$nickname: (add \$who to \$project | list projects"
                         . " | show \$project | hug \$nickname)'";

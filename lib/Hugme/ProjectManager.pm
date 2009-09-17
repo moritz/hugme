@@ -11,11 +11,16 @@ sub new {
     my $class = shift;
     my $options = shift || { };
 
-    my $self = bless {}, $class;
+    my $self = bless { options => $options }, $class;
+    $self->read_data();
+    return $self;
+}
+
+sub read_data {
+    my $self = shift;
     $self->{tokens}      = from_json( slurp 'tokens.json' );
     $self->{projects}    = from_json( slurp 'projects.json' );
     $self->_mogrify_project_list();
-    return $self;
 }
 
 sub _mogrify_project_list {
