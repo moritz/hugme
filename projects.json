@@ -23,6 +23,10 @@
         "owner" : "masak",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
     },
+    "november" : {
+        "owner" : "viklund",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "viklund" ]
+    },
     "tufte" : {
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
