@@ -62,12 +62,18 @@ sub irc_001 {
     return;
 }
 
+# Bot logic
+
 my %jobs;
 
 sub hug {
     my ($msg, $info) = @_;
+    my $extra = '';
+    $extra = ' and blushes' if rand() > 0.95;
+    $extra = "; $info->{nick}++" if rand() > 0.99;
     if ($msg =~ m/^(hug|cuddle) (\S+)/) {
-        return $2 eq 'me' ? "ACTION $1s $info->{nick}" : "ACTION $1s $2";
+        return ($2 eq 'me' ? "ACTION $1s $info->{nick}" : "ACTION $1s $2")
+            . $extra;
     }
 }
 
