@@ -31,7 +31,6 @@ POE::Session->create(
     heap => { irc => $irc },
 );
 
-$poe_kernel->run();
 
 sub _start {
     my $heap = $_[HEAP];
@@ -65,47 +64,88 @@ sub irc_001 {
 
 my %jobs;
 
+sub hug {
+    my ($msg, $info) = @_;
+    if ($msg =~ m/^(hug|cuddle) (\S+)/) {
+        return $2 eq 'me' ? "ACTION $1s $info->{nick}" : "ACTION $1s $2";
+    }
+}
+
+sub list_projects {
+    return 'I know about ' .  join ', ', sort keys %{ $pm->projects };
+}
+
+sub show {
+    my $msg = shift;
+    if ($msg =~ m/^show\s+(\S+)/) {
+        my $proj = $1;
+        if (defined $pm->projects($proj)) {
+            return "the following people have power over '$proj': "
+                    . join(", ", $pm->admins($proj))
+                    . '. URL: ' . $pm->url($proj);
+        } else {
+            return "sorry, I don't know anything about '$proj'";
+        }
+    }
+}
+
+sub add {
+    my ($msg, $info) = @_;
+    if ($msg =~ m/^add (\S+) to (\S+)\s*$/i) {
+        say "starting whois() to add $1 to $2";
+        push @{$jobs{$info->{nick}}}, {
+            channel => $info->{channel},
+            whom    => $1,
+            proj    => $2,
+        };
+        $irc->yield( whois => $info->{nick});
+    }
+    return;
+}
+
+sub reload {
+    $pm->read_data();
+    return "reloaded successfully";
+}
+
+sub help {
+    return '(add \$who to \$project | list projects | show \$project | hug \$nickname)';
+}
+
+my %actions = (
+    add             => \&add,
+    hug             => \&hug,
+    cuddle          => \&hug,
+    'list projects' => \&list_projects,
+    show            => \&show,
+    reload          => \&reload,
+    help            => \&help,
+);
+
+my $action_re = join '|',
+   sort { length($b) <=> length($a) }
+   keys %actions;
+
+print $action_re, $/;
+
 sub irc_public {
     my ($sender, $who, $where, $what) = @_[SENDER, ARG0 .. ARG2];
     my $nick = ( split /!/, $who )[0];
     my $channel = $where->[0];
     my $response;
-
+    my %info = (
+        channel => $channel,
+        nick    => $nick,
+    );
     if ($what =~ /^ \Q$nickname\E [:;,.]?  \s* (.+) /x) {
         my $msg = $1;
         print "received msg <<$msg>>\n";
-        if ($msg =~ m/^add (\S+) to (\S+)\s*$/i) {
-            say "starting whois() to add $1 to $2";
-            push @{$jobs{$nick}}, {
-                channel => $channel,
-                whom    => $1,
-                proj    => $2,
-            };
-            $irc->yield( whois => $nick);
-        } elsif ($msg =~ m/^(hug|cuddle) (\S+)/) {
-            $response = $2 eq 'me' ? "ACTION $1s $nick" : "ACTION $1s $2";
-        } elsif ($msg =~ m/^(?:list project|project list)/) {
-            my $proj = join ', ', sort keys %{ $pm->projects };
-            $response = "I know about these projects: $proj";
-        } elsif ($msg =~ m/^show (\S+)/) {
-            my $proj = $1;
-            if (defined $pm->projects($proj)) {
-                $response = "the following people have power over '$proj': "
-                            . join(", ", $pm->admins($proj))
-                            . '. URL: ' . $pm->url($proj);
-            } else {
-                $response = "sorry, I don't know anything about '$proj'";
-            }
-
-        } elsif ($msg =~ m/^reload data/) {
-            $pm->read_data();
-            $response = "reloaded successfully";
-        } elsif ($msg =~ m/^help/i) {
-            $response = "'$nickname: (add \$who to \$project | list projects"
-                        . " | show \$project | hug \$nickname)'";
+        if ($msg =~ m/^($action_re)/) {
+            my $response = $actions{$1}->($msg, \%info);
+            say_or_action($response, $channel, $nick) if defined $response;
         }
-        say_or_action($response, $channel, $nick);
     }
+
     return;
 }
 
@@ -164,3 +204,5 @@ sub _default {
 #    say join ' ', @output;
     return 0;
 }
+
+$poe_kernel->run();
