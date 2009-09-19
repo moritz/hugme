@@ -115,7 +115,7 @@ sub reload {
 }
 
 sub help {
-    return '(add \$who to \$project | list projects | show \$project | hug \$nickname)';
+    return '(add $who to $project | list projects | show $project | hug $nickname)';
 }
 
 my %actions = (
