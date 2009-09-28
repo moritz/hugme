@@ -5,11 +5,11 @@
     },
     "perl6-examples"  : {
         "owner" : "perl6",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
     },
     "proto"  : {
         "owner" : "masak",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
     },
     "svg-plot" : {
         "owner" : "moritz",
