@@ -7,6 +7,10 @@
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
     },
+    "nqp-rx"  : {
+        "owner" : "perl6",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
+    },
     "proto"  : {
         "owner" : "masak",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
