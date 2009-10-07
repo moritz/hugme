@@ -15,7 +15,7 @@ my $nickname = 'hugme';
 my $ircname = 'Adds collaborators to github projects';
 my $server = 'irc.freenode.net';
 
-my @channels = ('#perl6');
+my @channels = ('#perl6', '#perl6book');
 
 # We create a new PoCo-IRC object
 my $irc = POE::Component::IRC->spawn(
