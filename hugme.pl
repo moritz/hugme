@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use 5.010;
-use POE qw(Component::IRC);
+use POE qw(Component::IRC Component::IRC::Plugin::AutoJoin);
 use Data::Dumper;
 use lib 'lib';
 use Hugme::ProjectManager;
@@ -39,6 +39,9 @@ sub _start {
 # stashed it
     my $irc = $heap->{irc};
 
+    $irc->plugin_add('AutoJoin', POE::Component::IRC::Plugin::AutoJoin->new(
+                Channels => {map $_ => '', @channels} )
+            );
     $irc->yield( register => 'all' );
     $irc->yield( register => 'whois' );
     $irc->yield( connect => { } );
