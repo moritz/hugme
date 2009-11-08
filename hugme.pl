@@ -103,11 +103,15 @@ sub show {
 sub add {
     my ($msg, $info) = @_;
     if ($msg =~ m/^add (\S+) to (\S+)\s*$/i) {
+        my ($whom, $proj) = ($1, $2);
         say "starting whois() to add $1 to $2";
         push @{$jobs{$info->{nick}}}, {
             channel => $info->{channel},
-            whom    => $1,
-            proj    => $2,
+            action => sub {
+                my $account = shift;
+                my $response = $pm->add_collab($whom, $proj, $account);
+                say_or_action($response, $info->{channel}, $info->{nick});
+            },
         };
         $irc->yield( whois => $info->{nick});
     }
@@ -174,10 +178,7 @@ sub irc_whois {
     if ($w->{identified}
             && $w->{identified} =~ m/^is signed on as account (.*)/) {
         my $account = $1;
-        for (@{ $jobs{ $nick }}) {
-            my $response = $pm->add_collab($_->{whom}, $_->{proj}, $account);
-            say_or_action($response, $channel, $nick);
-        }
+        $_->{action}->($account) for (@{ $jobs{ $nick }});
     } else {
         $irc->yield(
             privmsg => $channel,
