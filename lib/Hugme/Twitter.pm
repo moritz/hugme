@@ -39,3 +39,5 @@ sub twit {
         return "Ooops, there was an error: $!";
     }
 }
+
+1;
