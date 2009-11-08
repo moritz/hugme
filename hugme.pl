@@ -5,6 +5,7 @@ use POE qw(Component::IRC Component::IRC::Plugin::AutoJoin);
 use Data::Dumper;
 use lib 'lib';
 use Hugme::ProjectManager;
+use Hugme::Twitter;
 
 my $pm = Hugme::ProjectManager->new();
 
@@ -82,6 +83,11 @@ sub hug {
     }
 }
 
+sub help {
+    return '(add $who to $project | list projects | show $project | hug $nickname | twit $twittername $message )'
+}
+
+
 sub list_projects {
     return 'I know about ' .  join ', ', sort keys %{ $pm->projects };
 }
@@ -118,13 +124,23 @@ sub add {
     return;
 }
 
+sub twit {
+    my ($msg, $info) = @_;
+    push @{$jobs{$info->{nick}}}, {
+        channel => $info->{channel},
+        action => sub {
+            my $account = shift;
+            my $response = Hugme::Twitter::twit($msg, $info, $account);
+            say_or_action($response, $info->{channel}, $info->{nick});
+        },
+    };
+    $irc->yield( whois => $info->{nick});
+    return;
+}
+
 sub reload {
     $pm->read_data();
     return "reloaded successfully";
-}
-
-sub help {
-    return '(add $who to $project | list projects | show $project | hug $nickname)';
 }
 
 my %actions = (
@@ -134,6 +150,7 @@ my %actions = (
     'list projects' => \&list_projects,
     show            => \&show,
     reload          => \&reload,
+    twit            => \&twit,
     help            => \&help,
 );
 
