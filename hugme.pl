@@ -84,7 +84,7 @@ sub hug {
 }
 
 sub help {
-    return '(add $who to $project | list projects | show $project | hug $nickname | twit $twittername $message )'
+    return '(add $who to $project | list projects | show $project | hug $nickname | tweet $twittername $message )'
 }
 
 
@@ -124,7 +124,7 @@ sub add {
     return;
 }
 
-sub twit {
+sub tweet {
     my ($msg, $info) = @_;
     push @{$jobs{$info->{nick}}}, {
         channel => $info->{channel},
@@ -150,7 +150,7 @@ my %actions = (
     'list projects' => \&list_projects,
     show            => \&show,
     reload          => \&reload,
-    twit            => \&twit,
+    tweet           => \&tweet,
     help            => \&help,
 );
 
