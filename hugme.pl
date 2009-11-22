@@ -41,7 +41,7 @@ sub _start {
     my $irc = $heap->{irc};
 
     $irc->plugin_add('AutoJoin', POE::Component::IRC::Plugin::AutoJoin->new(
-                Channels => {map $_ => '', @channels} )
+                Channels => {map {$_ => ''} @channels} )
             );
     $irc->yield( register => 'all' );
     $irc->yield( register => 'whois' );

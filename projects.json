@@ -11,6 +11,10 @@
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
     },
+    "gge"  : {
+        "owner" : "masak",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
+    },
     "perl6-examples"  : {
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
