@@ -7,6 +7,10 @@
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
     },
+    "ilbot"  : {
+        "owner" : "moritz",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
+    },
     "book"  : {
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
