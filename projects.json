@@ -21,38 +21,42 @@
     },
     "perl6-examples"  : {
         "owner" : "perl6",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "jnthn" ]
+    },
+    "nqpbook" : {
+        "owner" : "perl6",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "jnthn" ]
     },
     "nqp-rx"  : {
         "owner" : "perl6",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "jnthn" ]
     },
     "proto"  : {
         "owner" : "masak",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "jnthn" ]
     },
     "web"  : {
         "owner" : "masak",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "PerlJam", "jnthn" ]
     },
     "svg-plot" : {
         "owner" : "moritz",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "jnthn" ]
     },
     "svg-matchdumper" : {
         "owner" : "moritz",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "jnthn" ]
     },
     "temporal-flux-perl6syn" : {
         "owner" : "masak",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "jnthn" ]
     },
     "november" : {
         "owner" : "viklund",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "viklund" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "viklund", "jnthn" ]
     },
     "tufte" : {
         "owner" : "moritz",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "TimToady", "[particle]", "jnthn" ]
     }
 }
