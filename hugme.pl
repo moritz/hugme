@@ -158,7 +158,7 @@ sub reload {
 
 sub register {
     my ($msg, $info) = @_;
-    $irc->yield(privmsg => 'nickserv', "register $password moritz@faui2k3.org");
+    $irc->yield(privmsg => 'nickserv', "register $password moritz\@faui2k3.org");
     $irc->yield(privmsg => 'nickserv', "set hidemail on");
 }
 
