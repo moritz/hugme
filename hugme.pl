@@ -18,9 +18,6 @@ my $password;
     close $h;
 }
 
-my @password;
-@password = ('password', $password) if @password;
-
 # IRC stuff
 # mostly taken from the POE::Component::IRC's SYNOPSIS
 
@@ -32,10 +29,9 @@ my @channels = ('#perl6', '#perl6book');
 
 # We create a new PoCo-IRC object
 my $irc = POE::Component::IRC->spawn(
-        nick => $nickname,
+        nick    => $nickname,
         ircname => $ircname,
-        server => $server,
-        @password,
+        server  => $server,
 ) or die "Oh noooo! $!";
 
 POE::Session->create(
@@ -76,6 +72,8 @@ sub irc_001 {
 
 # we join our channels
     $irc->yield( join => $_ ) for @channels;
+
+    $irc->yield( privmsg => "identify $password") if defined $password;
     return;
 }
 
