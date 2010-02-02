@@ -9,6 +9,15 @@ use Hugme::Twitter;
 
 my $pm = Hugme::ProjectManager->new();
 
+my $password;
+
+{
+    open my $h, '<', 'password' or last;
+    $password = <$h>;
+    chomp $password;
+    close $h;
+}
+
 # IRC stuff
 # mostly taken from the POE::Component::IRC's SYNOPSIS
 
@@ -143,6 +152,12 @@ sub reload {
     return "reloaded successfully";
 }
 
+sub register {
+    my ($msg, $info) = @_;
+    $irc->yield(privmsg => 'nickserv', "register $password moritz@faui2k3.org");
+    $irc->yield(privmsg => 'nickserv', "set hidemail on");
+}
+
 my %actions = (
     add             => \&add,
     hug             => \&hug,
@@ -152,6 +167,7 @@ my %actions = (
     reload          => \&reload,
     tweet           => \&tweet,
     help            => \&help,
+    register        => \&register,
 );
 
 my $action_re = join '|',
