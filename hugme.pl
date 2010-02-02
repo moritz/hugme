@@ -18,6 +18,9 @@ my $password;
     close $h;
 }
 
+my @password;
+@password = ('password', $password) if @password;
+
 # IRC stuff
 # mostly taken from the POE::Component::IRC's SYNOPSIS
 
@@ -32,6 +35,7 @@ my $irc = POE::Component::IRC->spawn(
         nick => $nickname,
         ircname => $ircname,
         server => $server,
+        @password,
 ) or die "Oh noooo! $!";
 
 POE::Session->create(
@@ -167,7 +171,7 @@ my %actions = (
     reload          => \&reload,
     tweet           => \&tweet,
     help            => \&help,
-    register        => \&register,
+#    register        => \&register,
 );
 
 my $action_re = join '|',
