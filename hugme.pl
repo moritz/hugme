@@ -73,7 +73,7 @@ sub irc_001 {
 # we join our channels
     $irc->yield( join => $_ ) for @channels;
 
-    $irc->yield( privmsg => "identify $password") if defined $password;
+    $irc->yield( privmsg => "nickserv",  "identify $password") if defined $password;
     return;
 }
 
