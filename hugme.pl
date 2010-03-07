@@ -210,10 +210,8 @@ sub irc_whois {
     my $channel = eval {
         $jobs{ $nick }[-1]{channel};
     } or return;
-    if ($w->{identified}
-            && $w->{identified} =~ m/^is signed on as account (.*)/) {
-        my $account = $1;
-        $_->{action}->($account) for (@{ $jobs{ $nick }});
+    if ($w->{account})
+        $_->{action}->($w->account) for (@{ $jobs{ $nick }});
     } else {
         $irc->yield(
             privmsg => $channel,
