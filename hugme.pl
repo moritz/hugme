@@ -193,6 +193,8 @@ sub irc_public {
         if ($msg =~ m/^($action_re)/) {
             my $response = $actions{$1}->($msg, \%info);
             say_or_action($response, $channel, $nick) if defined $response;
+        } elsif ($msg ~~ m/[iI] want Perl 6 NOW!$/) {
+            $irc->yield( ctcp => $channel, "ACTION hugs $nick");
         }
     } elsif ($what =~ /^:(?:wq|x|q!?)/) {
         $irc->yield( ctcp => $channel, "ACTION hugs $nick, good vi(m) user!");
@@ -210,8 +212,8 @@ sub irc_whois {
     my $channel = eval {
         $jobs{ $nick }[-1]{channel};
     } or return;
-    if ($w->{account})
-        $_->{action}->($w->account) for (@{ $jobs{ $nick }});
+    if ($w->{account}) {
+        $_->{action}->($w->account) for @{ $jobs{ $nick }};
     } else {
         $irc->yield(
             privmsg => $channel,
