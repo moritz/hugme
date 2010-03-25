@@ -213,7 +213,7 @@ sub irc_whois {
         $jobs{ $nick }[-1]{channel};
     } or return;
     if ($w->{account}) {
-        $_->{action}->($w->account) for @{ $jobs{ $nick }};
+        $_->{action}->($w->{account}) for @{ $jobs{ $nick }};
     } else {
         $irc->yield(
             privmsg => $channel,
