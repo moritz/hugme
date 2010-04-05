@@ -44,7 +44,7 @@ sub add_collab {
         if ($nick =~ /@/ && $email !~ /@/) {
             ($email, $nick) = ($nick, $email);
         }
-        if ($nick !~ /@/) {
+        if ($email !~ /@/) {
             return 'usage: Add <email>,<nickname> to pugs';
         }
         for ($nick, $email) {
