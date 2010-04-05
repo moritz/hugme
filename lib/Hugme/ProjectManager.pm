@@ -39,28 +39,46 @@ sub add_collab {
         return "sorry, you don't have permissions to change '$repo'";
     }
 
-    my $owner = $self->{projects}{$repo}{owner};
-
-    my $github = Net::GitHub->new(
-        owner   => $owner,
-        login   => $owner,
-        repo    => $repo,
-        token   => $self->{tokens}{$owner},
-    );
-    my $response = $github->repos->add_collaborator($who);
-
-    if (reftype($response) eq 'HASH') {
-        return "ERROR: Can't add $who to $repo:  $response->{error}";
-    } elsif (reftype($response) eq 'ARRAY') {
-        my %u;
-        @u{@$response} = (1) x @$response;
-        if ($u{$who}) {
-            return "ACTION hugs $who. Welcome to $repo!";
-        } else {
-            return "github reported success, but it didn't work anyway - WTF?";
+    if ($repo eq 'pugs') {
+        my ($email, $nick) = split /,/, $who;
+        if ($nick =~ /@/ && $email !~ /@/) {
+            ($email, $nick) = ($nick, $email);
         }
+        if ($nick !~ /@/) {
+            return 'usage: Add <email>,<nickname> to pugs';
+        }
+        for ($nick, $email) {
+            unless (/^[\w@.+-]+\z/) {
+                return 'invalid character (only [\w@.+-] allowed';
+            }
+        }
+        system(qq["$^X" pugs-add-people.pl "$email" "$nick"&]);
+        return qq[ACTION hugs $nick. If all goes well you'll get an email soon];
     } else {
-        return "github responded in a a really unexpected way - HUH?";
+
+        my $owner = $self->{projects}{$repo}{owner};
+
+        my $github = Net::GitHub->new(
+            owner   => $owner,
+            login   => $owner,
+            repo    => $repo,
+            token   => $self->{tokens}{$owner},
+        );
+        my $response = $github->repos->add_collaborator($who);
+
+        if (reftype($response) eq 'HASH') {
+            return "ERROR: Can't add $who to $repo:  $response->{error}";
+        } elsif (reftype($response) eq 'ARRAY') {
+            my %u;
+            @u{@$response} = (1) x @$response;
+            if ($u{$who}) {
+                return "ACTION hugs $who. Welcome to $repo!";
+            } else {
+                return "github reported success, but it didn't work anyway - WTF?";
+            }
+        } else {
+            return "github responded in a a really unexpected way - HUH?";
+        }
     }
 }
 
