@@ -66,5 +66,13 @@
     "tufte" : {
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn" ]
+    },
+    "tardis" : {
+        "owner" : "masak",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "snarkyboojum" ]
+    },
+    "yapsi" : {
+        "owner" : "masak",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "snarkyboojum" ]
     }
 }
