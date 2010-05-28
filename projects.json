@@ -23,6 +23,10 @@
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
     },
+    "fakedbi" : {
+        "owner" : "mberends",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn", "sorear" ]
+    },
     "gge"  : {
         "owner" : "masak",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
