@@ -8,6 +8,7 @@ use Hugme::ProjectManager;
 use Hugme::Twitter;
 
 my $pm = Hugme::ProjectManager->new();
+use charnames qw(:full);
 
 my $password;
 
@@ -103,13 +104,21 @@ sub list_projects {
     return 'I know about ' .  join ', ', sort keys %{ $pm->projects };
 }
 
+sub scramble {
+    map {
+        my $a = $_;
+        substr($a, 1, 0, "\N{INVISIBLE SEPARATOR}");
+        $a
+    } @_;
+}
+
 sub show {
     my $msg = shift;
     if ($msg =~ m/^show\s+(\S+)/) {
         my $proj = $1;
         if (defined $pm->projects($proj)) {
             return "the following people have power over '$proj': "
-                    . join(", ", $pm->admins($proj))
+                    . join(", ", scramble $pm->admins($proj))
                     . '. URL: ' . $pm->url($proj);
         } else {
             return "sorry, I don't know anything about '$proj'";
