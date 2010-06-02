@@ -15,6 +15,10 @@
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
     },
+    "Math-RungeKutta"  : {
+        "owner" : "moritz",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn", "patrickas", "arnsholt" ]
+    },
     "rmp"  : {
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn", "arnsholt" ]
