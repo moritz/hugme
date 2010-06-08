@@ -69,7 +69,7 @@
     },
     "star" : {
         "owner" : "rakudo",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", 'mberends', 'sorear' ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "mberends", "sorear" ]
     },
     "temporal-flux-perl6syn" : {
         "owner" : "masak",
