@@ -87,6 +87,10 @@
         "owner" : "masak",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "snarkyboojum" ]
     },
+    "perl6-wtop" : {
+        "owner" : "moritz",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "colomon" ]
+    },
     "yapsi" : {
         "owner" : "masak",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "snarkyboojum" ]
