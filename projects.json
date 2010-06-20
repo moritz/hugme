@@ -79,6 +79,10 @@
         "owner" : "masak",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn" ]
     },
+    "try.rakudo.org" : {
+        "owner" : "moritz",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn" ]
+    },
     "november" : {
         "owner" : "viklund",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "viklund", "jnthn" ]
