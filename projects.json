@@ -27,9 +27,9 @@
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn", "patrickas", "arnsholt" ]
     },
-    "rmp"  : {
+    "modules.perl6.org"  : {
         "owner" : "moritz",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn", "arnsholt" ]
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn", "patrickas", "arnsholt" ]
     },
     "book"  : {
         "owner" : "perl6",
