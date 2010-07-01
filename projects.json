@@ -35,7 +35,7 @@
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
     },
-    "fakedbi" : {
+    "MiniDBI" : {
         "owner" : "mberends",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn", "sorear" ]
     },
