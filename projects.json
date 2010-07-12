@@ -43,6 +43,10 @@
         "owner" : "masak",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
     },
+    "ufo"  : {
+        "owner" : "masak",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
+    },
     "perl6-examples"  : {
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "jnthn" ]
