@@ -11,7 +11,7 @@
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn" ]
     },
-    "java2perl" : {
+    "java2perl6" : {
         "owner" : "timbunce",
         "auth" : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "mberends", "jnthn", "timbunce" ]
     },
