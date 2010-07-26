@@ -79,10 +79,6 @@
         "owner" : "rakudo",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "mberends", "sorear" ]
     },
-    "temporal-flux-perl6syn" : {
-        "owner" : "masak",
-        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn" ]
-    },
     "try.rakudo.org" : {
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn" ]
