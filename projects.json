@@ -51,6 +51,10 @@
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "jnthn" ]
     },
+    "bench-scripts"  : {
+        "owner" : "perl6",
+        "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "jnthn", "smash" ]
+    },
     "nqpbook" : {
         "owner" : "perl6",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "PerlJam", "jnthn" ]
