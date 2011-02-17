@@ -103,6 +103,10 @@
         "owner" : "moritz",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "colomon" ]
     },
+    "rakudo" : {
+        "owner" : "rakudo",
+        "auth" : ["pmichaud", "moritz_", "jnthn"]
+    },
     "yapsi" : {
         "owner" : "masak",
         "auth"  : [ "pmichaud", "moritz_", "masak", "colomon", "TimToady", "[particle]", "jnthn", "snarkyboojum" ]
