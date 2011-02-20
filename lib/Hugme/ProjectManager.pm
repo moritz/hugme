@@ -3,6 +3,7 @@ package Hugme::ProjectManager;
 use JSON qw(from_json);
 use File::Slurp qw(slurp);
 use Net::GitHub;
+use Net::GitHub::V2::Organizations;
 use Scalar::Util qw(reftype);
 use strict;
 use warnings;
@@ -54,7 +55,20 @@ sub add_collab {
         }
         system(qq["$^X" pugs-add-people.pl "$email" "$nick"&]);
         return qq[ACTION hugs $nick. If all goes well you'll get an email soon];
-    } else {
+    }
+    elsif ($repo eq 'perl6') {
+        my $orga = Net::GitHub::V2::Organizations->new(
+            owner => 'perl6',
+            login => 'moritz',
+            token => $self->{tokens}{moritz},
+        );
+        eval {
+            $orga->add_team_member(14366, $who);
+            return qq[ACTION hugs $who. Welcome to the perl6 github organization];
+        };
+        return "Error adding $who to perl6: $@";
+    }
+    else {
 
         my $owner = $self->{projects}{$repo}{owner};
 
