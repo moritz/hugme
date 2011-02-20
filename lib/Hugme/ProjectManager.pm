@@ -62,11 +62,8 @@ sub add_collab {
             login => 'moritz',
             token => $self->{tokens}{moritz},
         );
-        eval {
-            $orga->add_team_member(14366, $who);
-            return qq[ACTION hugs $who. Welcome to the perl6 github organization];
-        };
-        return "Error adding $who to perl6: $@";
+        $orga->add_team_member(14366, $who);
+        return qq[ACTION hugs $who. Welcome to the perl6 github organization];
     }
     else {
 
