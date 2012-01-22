@@ -40,23 +40,7 @@ sub add_collab {
         return "sorry, you don't have permissions to change '$repo'";
     }
 
-    if ($repo eq 'pugs') {
-        my ($email, $nick) = split /,/, $who;
-        if ($nick =~ /@/ && $email !~ /@/) {
-            ($email, $nick) = ($nick, $email);
-        }
-        if ($email !~ /@/) {
-            return 'usage: Add <email>,<nickname> to pugs';
-        }
-        for ($nick, $email) {
-            unless (/^[\w@.+-]+\z/) {
-                return 'invalid character (only [\w@.+-] allowed';
-            }
-        }
-        system(qq["$^X" pugs-add-people.pl "$email" "$nick"&]);
-        return qq[ACTION hugs $nick. If all goes well you'll get an email soon];
-    }
-    elsif ($repo eq 'perl6') {
+    if ($repo eq 'perl6') {
         my $orga = Net::GitHub::V2::Organizations->new(
             owner => 'perl6',
             login => 'moritz',
