@@ -221,8 +221,10 @@ sub irc_whois {
     my $channel = eval {
         $jobs{ $nick }[-1]{channel};
     } or return;
-    if ($w->{account}) {
-        $_->{action}->($w->{account}) for @{ $jobs{ $nick }};
+#    use Data::Dumper;
+#    print Dumper $w;
+    if ($w->{identified}) {
+        $_->{action}->($w->{identified}) for @{ $jobs{ $nick }};
     } else {
         $irc->yield(
             privmsg => $channel,
