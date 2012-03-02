@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use 5.010;
-use POE qw(Component::IRC Component::IRC::Plugin::AutoJoin);
+use POE qw(Component::IRC Component::IRC::Plugin::Connector Component::IRC::Plugin::AutoJoin);
 use Data::Dumper;
 use lib 'lib';
 use Hugme::ProjectManager;
@@ -49,7 +49,7 @@ sub _start {
 # retrieve our component's object from the heap where we
 # stashed it
     my $irc = $heap->{irc};
-
+    $irc->plugin_add(Connector => POE::Component::IRC::Plugin::Connector->new());
     $irc->plugin_add('AutoJoin', POE::Component::IRC::Plugin::AutoJoin->new(
                 Channels => {map {$_ => ''} @channels} )
             );
